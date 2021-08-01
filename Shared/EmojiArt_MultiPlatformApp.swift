@@ -8,10 +8,14 @@
 import SwiftUI
 
 @main
-struct EmojiArt_MultiPlatformApp: App {
+struct EmojiArt_CS193PApp: App {
+    @StateObject var paletteStore = PaletteStore(named: "Default")
+        
     var body: some Scene {
-        DocumentGroup(newDocument: EmojiArt_MultiPlatformDocument()) { file in
-            ContentView(document: file.$document)
+        DocumentGroup(newDocument: { EmojiArtDocument() }) { config in
+            EmojiArtDocumentView(document: config.document)
+                .environmentObject(paletteStore)
         }
     }
 }
+
